@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "DocHzRpEt7gx/vwt5IDHxqkuiqhW+hFcaSlGrhauJ0ocX3XTMjCd1S3ILk7edBAdcV7+klilLiqJnJ7xtvsdCw==",
+  "success": true,
+  "projectFilePath": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Anthony\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\Anthony\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\Anthony\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\Anthony\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
