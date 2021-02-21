@@ -21,14 +21,18 @@ namespace DownloadAPOD {
 
             string imageFileLocation = "";
             if (!File.Exists(configFileLocation)) {
-                Console.WriteLine("Enter the save location for the image. This can be changed later by deleting config.txt");
+                Console.WriteLine("Enter the save location for the image or leave blank to store in program directory.");
                 File.WriteAllText(configFileLocation, Console.ReadLine());
-                if (!File.ReadAllText(configFileLocation).EndsWith("\\")) {
+                if (!File.ReadAllText(configFileLocation).EndsWith("\\") && !File.ReadAllText(configFileLocation).Equals("")) {
                     File.WriteAllText(configFileLocation, File.ReadAllText(configFileLocation) + "\\");
                 }
             }
             
-            imageFileLocation = File.ReadAllText(configFileLocation);            
+            imageFileLocation = File.ReadAllText(configFileLocation);
+            if (imageFileLocation.Equals("")) {
+                imageFileLocation = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                File.WriteAllText(configFileLocation,imageFileLocation);
+            }
 
             //Set up dateString
             DateTime date = DateTime.Now;
