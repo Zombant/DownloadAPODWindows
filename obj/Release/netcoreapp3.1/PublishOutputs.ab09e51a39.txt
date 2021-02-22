@@ -1,0 +1,5 @@
+D:\Anthony\VisualStudioProjects\DownloadAPOD\DownloadAPOD\bin\publish\DownloadAPOD.exe
+D:\Anthony\VisualStudioProjects\DownloadAPOD\DownloadAPOD\bin\publish\DownloadAPOD.dll
+D:\Anthony\VisualStudioProjects\DownloadAPOD\DownloadAPOD\bin\publish\DownloadAPOD.deps.json
+D:\Anthony\VisualStudioProjects\DownloadAPOD\DownloadAPOD\bin\publish\DownloadAPOD.runtimeconfig.json
+D:\Anthony\VisualStudioProjects\DownloadAPOD\DownloadAPOD\bin\publish\DownloadAPOD.pdb
