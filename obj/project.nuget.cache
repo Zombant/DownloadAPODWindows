@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "L2Q5/YFK+zTc0ybZEC1jGG5K7rT/1AXn+bzfUI8ceM321XyzsEUm7WrD2qWwpXsAWIXiDJE8pRf1q7f9ksDhfQ==",
+  "success": true,
+  "projectFilePath": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Anthony\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

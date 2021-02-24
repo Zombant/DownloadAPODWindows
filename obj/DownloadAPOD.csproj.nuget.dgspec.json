@@ -1,0 +1,58 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj": {}
+  },
+  "projects": {
+    "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj",
+        "projectName": "DownloadAPOD",
+        "projectPath": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj",
+        "packagesPath": "C:\\Users\\Anthony\\.nuget\\packages\\",
+        "outputPath": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Anthony\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net46"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net46": {
+            "targetAlias": "net46",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net46": {
+          "targetAlias": "net46",
+          "dependencies": {
+            "Microsoft.Win32.Registry": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
