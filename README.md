@@ -1,3 +1,3 @@
 # DownloadAPOD
 
-Installer File: [DownloadAPODInstaller.exe](DownloadAPODInstaller.exe)
+[Download Latest](https://github.com/Zombant/DownloadAPOD/releases/tag/release)
