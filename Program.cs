@@ -95,7 +95,8 @@ namespace DownloadAPOD {
             //Remove unwanted parts from URL ending
             wantedLine = wantedLine.Trim();
             int beginningIndex = wantedLine.IndexOf('i');
-            string imageURLEnd = wantedLine.Substring(beginningIndex, wantedLine.Length - beginningIndex - 2);
+            int endIndex = wantedLine.IndexOf('\"', beginningIndex);
+            string imageURLEnd = wantedLine.Substring(beginningIndex, endIndex-beginningIndex);
             Console.WriteLine("Image Downloading:      " + imageURLEnd);
 
             //Download Image

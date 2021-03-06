@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj": {}
+    "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD.csproj": {}
   },
   "projects": {
-    "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj": {
+    "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj",
+        "projectUniqueName": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD.csproj",
         "projectName": "DownloadAPOD",
-        "projectPath": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\DownloadAPOD.csproj",
+        "projectPath": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD.csproj",
         "packagesPath": "C:\\Users\\Anthony\\.nuget\\packages\\",
-        "outputPath": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\DownloadAPOD\\obj\\",
+        "outputPath": "D:\\Anthony\\VisualStudioProjects\\DownloadAPOD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Anthony\\AppData\\Roaming\\NuGet\\NuGet.Config",
