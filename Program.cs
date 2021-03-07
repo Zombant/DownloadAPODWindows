@@ -8,11 +8,55 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace DownloadAPOD {
     class Program {
+        //TODO: Download all images within a period
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
 
+        /*
+         * -h or --help: help
+         * YYMMDD: date in YYMMDD format
+         * -nw or --no-wallpaper: don't set as wallpaper
+         * -r or --random: random image
+         * */
         static void Main(string[] args) {
+
+            //Make sure there are valid arguments
+            string dateArg = "";
+            bool shouldChooseRandom = false;
+            foreach (string arg in args) {
+                int dateInt = -1;
+                try {
+                    dateInt = (Int32.Parse(arg));
+                } catch { }
+
+                if(dateInt != -1) {
+                    dateArg += arg;
+                    continue;
+                }
+                if (!arg.Equals("-r") && !arg.Equals("--random") && !arg.Equals("-h") && !arg.Equals("--help") && !arg.Equals("-nw") && !arg.Equals("--no-wallpaper")) {
+                    Console.WriteLine("Invalid arguments. Use -h or --help to see available arguments");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
+
+            }
+
+            //If -h or --help is used as an argument
+            if(Array.Exists(args, element => element.Equals("-h") || element.Equals("--help"))) {
+                Console.WriteLine("Usage:   -h   or  --help             Help Menu");
+                Console.WriteLine("         -nw  or  --no-wallpaper     Do not set as wallpaper");
+                Console.WriteLine("         -r   or  --random           Random image");
+                Console.WriteLine("         YYMMDD                      Specify a date in YYMMDD format");
+                Environment.Exit(0);
+                return;
+            }
+
+            //If -r or --random is used as an argument
+            if (Array.Exists(args, element => element.Equals("-r") || element.Equals("--random"))) {
+                Console.WriteLine("Choosing random image...");
+                shouldChooseRandom = true;
+            }
 
             string htmlFileLocation = @"apod.txt";
             string configFileLocation = @"config.txt";
@@ -35,33 +79,51 @@ namespace DownloadAPOD {
             }
 
             //Set up dateString
-            DateTime date = DateTime.Now;
-            string dateString = date.Year + "";
-            dateString = dateString.Substring(2, dateString.Length - 2);
-            switch (date.Month) {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                    dateString = dateString + "0" + date.Month;
-                    break;
-                case 10:
-                case 11:
-                case 12:
-                    dateString = dateString + date.Month;
-                    break;
+            string dateString = "";
+            DateTime date;
+            if (dateArg.Equals("")) {
+                
+                if (shouldChooseRandom) {
+                    //TODO: Display day that is downloading in file name
+                    Random rand = new Random();
+                    DateTime firstImage = new DateTime(1995, 6, 16);
+                    int range = (DateTime.Today - firstImage).Days;
+                    date = firstImage.AddDays(rand.Next(range));
+                } else {
+                    date = DateTime.Now;
+                }
+                Console.WriteLine("Image Date: " + date.ToString("d"));
+                dateString = date.Year + "";
+                dateString = dateString.Substring(2, dateString.Length - 2);
+                switch (date.Month) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        dateString = dateString + "0" + date.Month;
+                        break;
+                    case 10:
+                    case 11:
+                    case 12:
+                        dateString = dateString + date.Month;
+                        break;
+                }
+                if (date.Day >= 1 && date.Day <= 9) {
+                    dateString = dateString + "0" + date.Day;
+                } else {
+                    dateString = dateString + date.Day;
+                }
+            } else {
+                dateString += dateArg;
             }
-            if(date.Day >= 1 && date.Day <= 9) {
-                dateString = dateString + "0" + date.Day; 
-            }
-            else {
-                dateString = dateString + date.Day;
-            }
+
+            
+            
 
             //Use dateString to make apodImageToDownload
             string apodImageToDownloadHTML = "https://apod.nasa.gov/apod/ap" + dateString +".html";
@@ -69,7 +131,13 @@ namespace DownloadAPOD {
 
             //Download HTML as TXT
             using(WebClient client = new WebClient()) {
-                client.DownloadFile(apodImageToDownloadHTML, htmlFileLocation);
+                try {
+                    client.DownloadFile(apodImageToDownloadHTML, htmlFileLocation);
+                } catch {
+                    Console.WriteLine("Failed to download image. Make sure you choose a valid date.");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
             }
             Console.WriteLine("Downloading HTML from:  " + apodImageToDownloadHTML);
 
@@ -103,24 +171,28 @@ namespace DownloadAPOD {
             string imageURL = "https://apod.nasa.gov/apod/" + imageURLEnd;
             Console.WriteLine("Image URL:              " + imageURL);
             using (WebClient client = new WebClient()) {
-                client.DownloadFile(imageURL, imageFileLocation + imageFileName);
+                client.DownloadFile(imageURL, imageFileLocation + dateString + imageFileName);
             }
 
             //Delete HTML file
             File.Delete(htmlFileLocation);
             //Console.WriteLine("\nDeleting:               " + htmlFileLocation);
             Console.WriteLine("Image saved to " + imageFileLocation);
-            //Console.ReadLine();
 
             //Set wallpaper
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
-            key.SetValue(@"WallpaperStyle", 10.ToString());
-            key.SetValue(@"TileWallpaper", 0.ToString());
-            SystemParametersInfo(20, 0, imageFileLocation + imageFileName, 0x01 | 0x02);
+            if (!Array.Exists(args, element => element.Equals("-nw") && !element.Equals("--no-wallpaper"))) {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+                key.SetValue(@"WallpaperStyle", 10.ToString());
+                key.SetValue(@"TileWallpaper", 0.ToString());
+                SystemParametersInfo(20, 0, imageFileLocation + dateString + imageFileName, 0x01 | 0x02);
+                Console.WriteLine("Image set as wallpaper");
+                return;
+            }
+
 
         }
 
-        
+
     }
 }
 
