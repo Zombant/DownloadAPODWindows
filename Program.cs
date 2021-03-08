@@ -18,6 +18,7 @@ namespace DownloadAPOD {
          * YYMMDD: date in YYMMDD format
          * -nw or --no-wallpaper: don't set as wallpaper
          * -r or --random: random image
+         * -d or --default: save image to current directory
          * */
         static void Main(string[] args) {
 
@@ -34,7 +35,7 @@ namespace DownloadAPOD {
                     dateArg += arg;
                     continue;
                 }
-                if (!arg.Equals("-r") && !arg.Equals("--random") && !arg.Equals("-h") && !arg.Equals("--help") && !arg.Equals("-nw") && !arg.Equals("--no-wallpaper")) {
+                if (!arg.Equals("-d") && !arg.Equals("--default") && !arg.Equals("-r") && !arg.Equals("--random") && !arg.Equals("-h") && !arg.Equals("--help") && !arg.Equals("-nw") && !arg.Equals("--no-wallpaper")) {
                     Console.WriteLine("Invalid arguments. Use -h or --help to see available arguments");
                     Console.ReadKey();
                     Environment.Exit(0);
@@ -47,6 +48,7 @@ namespace DownloadAPOD {
                 Console.WriteLine("Usage:   -h   or  --help             Help Menu");
                 Console.WriteLine("         -nw  or  --no-wallpaper     Do not set as wallpaper");
                 Console.WriteLine("         -r   or  --random           Random image");
+                Console.WriteLine("         -d   or  --default          Save in this directory and do not create config file");
                 Console.WriteLine("         YYMMDD                      Specify a date in YYMMDD format");
                 Environment.Exit(0);
                 return;
@@ -62,21 +64,31 @@ namespace DownloadAPOD {
             string configFileLocation = @"config.txt";
             string imageFileName = "apod.jpg";
 
-
             string imageFileLocation = "";
-            if (!File.Exists(configFileLocation)) {
-                Console.WriteLine("Enter the save location for the image or leave blank to store in program directory.");
-                File.WriteAllText(configFileLocation, Console.ReadLine());
-                if (!File.ReadAllText(configFileLocation).EndsWith("\\") && !File.ReadAllText(configFileLocation).Equals("")) {
-                    File.WriteAllText(configFileLocation, File.ReadAllText(configFileLocation) + "\\");
+            //If the default flags are used
+            if (Array.Exists(args, element => element.Equals("-d") || element.Equals("--default"))) {
+                //Use this location and do not create a config file
+                imageFileLocation = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+            } else {
+                
+                //Create config file if it does not exist
+                if (!File.Exists(configFileLocation)) {
+                    Console.WriteLine("Enter the save location for the image or leave blank to store in program directory.");
+                    File.WriteAllText(configFileLocation, Console.ReadLine());
+                    if (!File.ReadAllText(configFileLocation).EndsWith("\\") && !File.ReadAllText(configFileLocation).Equals("")) {
+                        File.WriteAllText(configFileLocation, File.ReadAllText(configFileLocation) + "\\");
+                    }
+                }
+
+                //Read from config file
+                imageFileLocation = File.ReadAllText(configFileLocation);
+                if (imageFileLocation.Equals("")) {
+                    imageFileLocation = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                    File.WriteAllText(configFileLocation, imageFileLocation);
                 }
             }
             
-            imageFileLocation = File.ReadAllText(configFileLocation);
-            if (imageFileLocation.Equals("")) {
-                imageFileLocation = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-                File.WriteAllText(configFileLocation,imageFileLocation);
-            }
+            
 
             //Set up dateString
             string dateString = "";
@@ -177,7 +189,7 @@ namespace DownloadAPOD {
             //Delete HTML file
             File.Delete(htmlFileLocation);
             //Console.WriteLine("\nDeleting:               " + htmlFileLocation);
-            Console.WriteLine("Image saved to " + imageFileLocation);
+            Console.WriteLine("Image saved to " + imageFileLocation + dateString + imageFileName);
 
             //Set wallpaper
             if (!Array.Exists(args, element => element.Equals("-nw") && !element.Equals("--no-wallpaper"))) {
@@ -189,7 +201,7 @@ namespace DownloadAPOD {
                 return;
             }
 
-
+            Environment.Exit(0);
         }
 
 
