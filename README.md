@@ -1,6 +1,8 @@
 # DownloadAPOD
 Program that downloads any NASA APOD (Astronomy Picture of the Day) and sets it as your wallpaper
 
+[Go to NASA's APOD website](https://apod.nasa.gov/apod/astropix.html)
+
 ## Releases
 
 [Download Latest](https://github.com/Zombant/DownloadAPOD/releases/tag/release)
