@@ -1,4 +1,5 @@
 # DownloadAPOD
+Program that downloads any NASA APOD (Astronomy Picture of the Day) and sets it as your wallpaper
 
 ## Releases
 
